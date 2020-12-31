@@ -7,4 +7,8 @@
 开发环境支持热更新。  
 
 ## 功能列表  
-![功能列表](http://note.youdao.com/yws/public/resource/2f9dd0205a972ef294d6906edeb10a61/xmlnote/18153039C77D472D879F9A6AA3358EF4/8247)
+![功能列表](http://note.youdao.com/yws/public/resource/2f9dd0205a972ef294d6906edeb10a61/xmlnote/18153039C77D472D879F9A6AA3358EF4/8247)  
+
+## 本地开发访问地址  
+首页： `http://localhost:8080` 或 `http://localhost:8080/index.html`  
+注册页： `http://localhost:8080/register.html`
