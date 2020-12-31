@@ -1,0 +1,37 @@
+{
+  "name": "react-shop-h5",
+  "version": "1.0.0",
+  "description": "参考极客时间商城（h5），使用react进行开发，webpack配合进行项目构建。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --config webpack.dev.js --open",
+    "build": "webpack --config webpack.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mone-Lee/react-shop-h5.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mone-Lee/react-shop-h5/issues"
+  },
+  "homepage": "https://github.com/Mone-Lee/react-shop-h5#readme",
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-redux": "^5.0.6",
+    "redux": "^4.0.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "webpack": "^4.31.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-project-builder": "^1.0.5",
+    "webpack-dev-server": "^3.3.1"
+  }
+}
