@@ -39,7 +39,7 @@ class Register extends Component {
   }
 
   register = () => {
-    const { 
+    const {
       username,
       password,
       rePassword,

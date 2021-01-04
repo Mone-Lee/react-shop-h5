@@ -1,3 +1,6 @@
+import http from '../../assets/utils/http';
+// import axios from 'axios';
+
 import {
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
@@ -25,15 +28,23 @@ export const registerError = (data) => {
 }
 
 export const register = (username, password, email) => {
-  return dispatch => {
+  return async (dispatch) => {
     dispatch(registerRequest());
 
-    return setTimeout(() => {
+    const res = await http.post('register', {
+      username,
+      password,
+      email
+    })
+
+    if (res.errcode === 0) {
       dispatch(registerSuccess({
         username,
         password,
         email
       }))
-    }, 100)  
+    } else {
+      dispatch(registeError());
+    }
   }
 }
