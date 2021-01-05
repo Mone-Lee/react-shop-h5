@@ -46,7 +46,12 @@ class Register extends Component {
       email
     } = this.state;
 
-    this.props.register(username, password, email);
+    // 输入内容校验
+
+    this.props.register(username, password, email)
+      .then(() => {
+        alert('注册成功');
+      });
   }
 
   render() {

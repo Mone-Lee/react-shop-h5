@@ -2,11 +2,21 @@ const Koa = require('koa');
 const Router = require('koa-router');
 const app = new Koa();
 const router = new Router();
+
+const user = require('./controllers/user')
+
+// 连接数据库
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/react_shop_h5');
+mongoose.connection.once("open", () => {
+  console.log('数据库链接成功')
+})
+
 // 引入koa-bodyparser中间件，这个中间件可以将post请求的参数转为json格式返回
-const bodyParser = require('koa-bodyparser');
+const bodyParser = require('koa-bodyparser')
 app.use(bodyParser());
 
-
+// 处理跨域问题
 app.use(async (ctx, next) => {
   ctx.set("Access-Control-Allow-Origin", "*");
   ctx.set("Access-Control-Allow-Credentials", true);
@@ -21,11 +31,8 @@ app.use(async (ctx, next) => {
 })
 
 router.prefix('/api');
-router.post('/user/register', (ctx, next) => {
-  console.log(ctx.request.body);
-  ctx.body = ctx.request.body;
-  ctx.status = 200;
-})
+// 注册接口
+router.post('/user/register', user.register);
 
 app
   .use(router.routes())  // 启动路由

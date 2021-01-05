@@ -22,8 +22,8 @@ export default {
       })
       .catch(err => {
         let result = {
-          errcode: response.body.status,
-          errmsg: response.body.errmsg,
+          errcode: err.errcode,
+          errmsg: err.errmsg,
           token: '',
           data: null
         }
