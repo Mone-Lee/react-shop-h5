@@ -6,6 +6,8 @@
 通过直接引入自己编写的npm包（[webpack-project-builder](https://www.npmjs.com/package/webpack-project-builder)）简化搭建过程。  
 开发环境支持热更新。  
 
+接口使用koa2.x + mongodb(mongoose)进行模拟开发。 
+
 ## 功能列表  
 ![功能列表](http://note.youdao.com/yws/public/resource/2f9dd0205a972ef294d6906edeb10a61/xmlnote/18153039C77D472D879F9A6AA3358EF4/8247)  
 
