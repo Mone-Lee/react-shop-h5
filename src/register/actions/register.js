@@ -1,5 +1,4 @@
 import http from '../../assets/utils/http';
-// import axios from 'axios';
 
 import {
   REGISTER_REQUEST,
@@ -31,7 +30,7 @@ export const register = (username, password, email) => {
   return async (dispatch) => {
     dispatch(registerRequest());
 
-    const res = await http.post('register', {
+    const res = await http.post('user/register', {
       username,
       password,
       email

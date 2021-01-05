@@ -21,6 +21,7 @@
   "homepage": "https://github.com/Mone-Lee/react-shop-h5#readme",
   "dependencies": {
     "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

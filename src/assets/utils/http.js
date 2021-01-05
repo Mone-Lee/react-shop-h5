@@ -6,8 +6,7 @@ export default {
       let requestUrl = baseUrl + url
       fetch(requestUrl, {
         method: 'POST',
-        mode: 'no-cors',
-        header: {
+        headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
