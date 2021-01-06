@@ -54,6 +54,10 @@ class Register extends Component {
       });
   }
 
+  pageToLogin = () => {
+    window.location.href = '/login.html';
+  }
+
   render() {
     return (
       <div className="container">
@@ -95,7 +99,7 @@ class Register extends Component {
 
         <div className='register-btn' onClick={this.register}>确定</div>
         <div className="check-type">
-          <div className="login">已有账号，直接登录</div>
+          <div className="login" onClick={this.pageToLogin}>已有账号，直接登录</div>
         </div>
       </div>
     )
