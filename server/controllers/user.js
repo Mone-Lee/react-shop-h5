@@ -64,8 +64,13 @@ class UserController {
 
       const res = await UserModel.findOne({ 'username': username })
       if (res) {
-        ctx.body = 'login success.';
-        ctx.status = 200;
+        if (res.password === password) {
+          ctx.body = 'login success.';
+          ctx.status = 200;
+        } else {
+          ctx.body = 'password not match.';
+          ctx.status = 500;
+        }
       } else {
         ctx.body = `do not find user: ${username}`;
         ctx.status = 500;
