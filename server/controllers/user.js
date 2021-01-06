@@ -19,6 +19,8 @@ class UserController {
           errcode: 400,
           errmsg: `expected an object with username, password, email but got: ${body}`,
         };
+
+        return;
       } else {
         const res = await UserModel.create([
           { username, email, password }
@@ -39,8 +41,41 @@ class UserController {
       ctx.status = 500;
     }
   }
+
+  /**
+   * 登录逻辑
+   * @param {*} ctx
+   */
+  static async login(ctx) {
+    const { body } = ctx.request;
+    const username = body.username;
+    const password = body.password;
+
+    try {
+      if (!username || !password) {
+        ctx.status = 400;
+
+        ctx.body = {
+          error: `expected an object with username, password but got: ${body}`,
+        };
+
+        return;
+      }
+
+      const res = await UserModel.findOne({ 'username': username })
+      if (res) {
+        ctx.body = 'login success.';
+        ctx.status = 200;
+      } else {
+        ctx.body = `do not find user: ${username}`;
+        ctx.status = 500;
+      }
+    } catch(err) {
+    }
+  }
 }
 
 module.exports = {
-  register: UserController.register
+  register: UserController.register,
+  login: UserController.login
 }

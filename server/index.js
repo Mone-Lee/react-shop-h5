@@ -33,6 +33,8 @@ app.use(async (ctx, next) => {
 router.prefix('/api');
 // 注册接口
 router.post('/user/register', user.register);
+// 登录接口
+router.post('/user/login', user.login);
 
 app
   .use(router.routes())  // 启动路由
