@@ -14,13 +14,7 @@ export default {
 
         resolve(res.data)
       }).catch((err) => {
-        let result = {
-          errcode: err.response.status,
-          errmsg: err.response.data.error,
-          token: '',
-          data: null
-        }
-        reject(result)
+        reject(err)
       })
     })
   }

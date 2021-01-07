@@ -15,29 +15,41 @@ class UserController {
 
     try {
       if (!username || !email || !password) {
-        ctx.status = 400;
-
         ctx.body = {
-          errcode: 400,
+          errcode: -1,
           errmsg: `expected an object with username, password, email but got: ${body}`,
+          token: '',
+          data: null
         };
+        ctx.status = 200;
 
-        return;
       } else {
         const res = await UserModel.create([
           { username, email, password }
         ])
 
         if (res) {
-          ctx.status = 200;
-          ctx.body = 'success';
-        } else {
-          ctx.status = 500;
           ctx.body = {
-            errcode: 500,
+            errcode: 0,
+            errmsg: 'register success',
+            // 生成 token 返回给客户端
+            token: jsonwebtoken.sign({
+              data: { username, email, password },
+              // 设置 token 过期时间
+              exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 7), // token过期时间是1星期
+            }, 'jwt_secret'),
+            data: { username, email, password }
+          };
+        } else {
+          ctx.body = {
+            errcode: -2,
             errmsg: 'insert data fail',
+            token: '',
+            data: null
           };
         }
+
+        ctx.status = 200;
       }
     } catch(err) {
       ctx.status = 500;
@@ -55,10 +67,11 @@ class UserController {
 
     try {
       if (!username || !password) {
-        ctx.status = 400;
-
         ctx.body = {
-          error: `expected an object with username, password but got: ${body}`,
+          errcode: -1,
+          errmsg: `expected an object with username, password but got: ${body}`,
+          token: '',
+          data: null
         };
 
         return;
@@ -74,7 +87,7 @@ class UserController {
           }
 
           ctx.body = {
-            code: 0,
+            errcode: 0,
             message: 'login success.',
             data: {
               user: userInfo,
@@ -86,20 +99,24 @@ class UserController {
               exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 7), // token过期时间是1星期
             }, 'jwt_secret'),
           }
-
-          ctx.status = 200;
         } else {
           ctx.body = {
-            error: 'password not match.',
+            errcode: -1,
+            errmsg: 'password not match.',
+            token: '',
+            data: null
           };
-          ctx.status = 500;
         }
       } else {
         ctx.body = {
-          error: `do not find user: ${username}`,
+          errcode: -2,
+          errmsg: `do not find user: ${username}`,
+          token: '',
+          data: null
         };
-        ctx.status = 500;
       }
+
+      ctx.status = 200;
     } catch(err) {
     }
   }

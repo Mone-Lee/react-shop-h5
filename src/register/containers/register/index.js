@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './index.less';
+import { setItem } from '../../../assets/utils/common';
 import { register } from '../../actions/register';
 import { connect } from 'react-redux';
+import { Toast } from 'antd-mobile';
 
 class Register extends Component {
   constructor() {
@@ -38,7 +40,7 @@ class Register extends Component {
     });
   }
 
-  register = () => {
+  register = async () => {
     const {
       username,
       password,
@@ -48,10 +50,14 @@ class Register extends Component {
 
     // 输入内容校验
 
-    this.props.register(username, password, email)
-      .then(() => {
-        alert('注册成功');
-      });
+    const res = await this.props.register(username, password, email)
+    console.log(res);
+    if (res.errcode === 0) {
+      setItem('token', res.token);
+      Toast.info('注册成功')
+    } else {
+      Toast.info(res.errmsg)
+    }
   }
 
   pageToLogin = () => {

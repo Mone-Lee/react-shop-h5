@@ -45,5 +45,7 @@ export const register = (username, password, email) => {
     } else {
       dispatch(registeError());
     }
+
+    return res;
   }
 }

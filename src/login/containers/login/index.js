@@ -3,6 +3,7 @@ import './index.less';
 import { setItem } from '../../../assets/utils/common';
 import { login } from '../../actions/login';
 import { connect } from 'react-redux';
+import { Toast } from 'antd-mobile';
 
 class Login extends Component {
   constructor() {
@@ -29,16 +30,19 @@ class Login extends Component {
     })
   }
 
-  login = () => {
+  login = async () => {
     const {
       username,
       password
     } = this.state;
 
-    this.props.login(username, password)
-      .then((res) => {
-        setItem('token', res.token);
-      })
+    const res = await this.props.login(username, password)
+    if (res.errcode === 0) {
+      setItem('token', res.token);
+      Toast.info('登录成功')
+    } else {
+      Toast.info(res.errmsg)
+    }
   }
 
   render() {
