@@ -1,3 +1,5 @@
+const jsonwebtoken = require('jsonwebtoken');
+
 const UserModel = require('../models/user');
 
 class UserController {
@@ -65,14 +67,37 @@ class UserController {
       const res = await UserModel.findOne({ 'username': username })
       if (res) {
         if (res.password === password) {
-          ctx.body = 'login success.';
+          let userInfo = {
+            username,
+            password,
+            email: res.email
+          }
+
+          ctx.body = {
+            code: 0,
+            message: 'login success.',
+            data: {
+              user: userInfo,
+            },
+            // 生成 token 返回给客户端
+            token: jsonwebtoken.sign({
+              data: userInfo,
+              // 设置 token 过期时间
+              exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 7), // token过期时间是1星期
+            }, 'jwt_secret'),
+          }
+
           ctx.status = 200;
         } else {
-          ctx.body = 'password not match.';
+          ctx.body = {
+            error: 'password not match.',
+          };
           ctx.status = 500;
         }
       } else {
-        ctx.body = `do not find user: ${username}`;
+        ctx.body = {
+          error: `do not find user: ${username}`,
+        };
         ctx.status = 500;
       }
     } catch(err) {

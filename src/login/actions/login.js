@@ -35,5 +35,7 @@ export const login = (username, password) => {
     } else {
       dispatch(loginError());
     }
+
+    return res;
   }
 }

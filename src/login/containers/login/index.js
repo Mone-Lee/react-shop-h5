@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './index.less';
+import { setItem } from '../../../assets/utils/common';
 import { login } from '../../actions/login';
 import { connect } from 'react-redux';
 
@@ -35,6 +36,9 @@ class Login extends Component {
     } = this.state;
 
     this.props.login(username, password)
+      .then((res) => {
+        setItem('token', res.token);
+      })
   }
 
   render() {
