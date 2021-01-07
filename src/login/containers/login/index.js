@@ -18,6 +18,10 @@ class Login extends Component {
     window.location.href = '/register.html';
   }
 
+  pageToIndex = () => {
+    window.location.href = '/index.html';
+  }
+
   onUsernameChange = (e) => {
     this.setState({
       username: e.target.value
@@ -39,7 +43,8 @@ class Login extends Component {
     const res = await this.props.login(username, password)
     if (res.errcode === 0) {
       setItem('token', res.token);
-      Toast.info('登录成功')
+      Toast.info('登录成功');
+      this.pageToIndex();
     } else {
       Toast.info(res.errmsg)
     }

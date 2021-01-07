@@ -54,7 +54,8 @@ class Register extends Component {
     console.log(res);
     if (res.errcode === 0) {
       setItem('token', res.token);
-      Toast.info('注册成功')
+      Toast.info('注册成功');
+      this.pageToIndex();
     } else {
       Toast.info(res.errmsg)
     }
@@ -62,6 +63,10 @@ class Register extends Component {
 
   pageToLogin = () => {
     window.location.href = '/login.html';
+  }
+
+  pageToIndex = () => {
+    window.location.href = '/index.html';
   }
 
   render() {
