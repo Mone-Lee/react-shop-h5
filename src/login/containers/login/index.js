@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './index.less';
-import { setItem } from '../../../assets/utils/common';
+import { setItem } from '../../../../assets/utils/common';
 import { login } from '../../actions/login';
 import { connect } from 'react-redux';
 import { Toast } from 'antd-mobile';
@@ -44,7 +44,9 @@ class Login extends Component {
     if (res.errcode === 0) {
       setItem('token', res.token);
       Toast.info('登录成功');
-      this.pageToIndex();
+      setTimeout(() => {
+        this.pageToIndex();
+      }, 100)
     } else {
       Toast.info(res.errmsg)
     }

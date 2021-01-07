@@ -1,4 +1,4 @@
-import http from '../../assets/utils/http';
+import http from '../../../assets/utils/http';
 
 import {
   REGISTER_REQUEST,

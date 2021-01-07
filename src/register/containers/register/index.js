@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './index.less';
-import { setItem } from '../../../assets/utils/common';
+import { setItem } from '../../../../assets/utils/common';
 import { register } from '../../actions/register';
 import { connect } from 'react-redux';
 import { Toast } from 'antd-mobile';
@@ -55,7 +55,9 @@ class Register extends Component {
     if (res.errcode === 0) {
       setItem('token', res.token);
       Toast.info('注册成功');
-      this.pageToIndex();
+      setTimeout(() => {
+        this.pageToIndex();
+      }, 100)
     } else {
       Toast.info(res.errmsg)
     }

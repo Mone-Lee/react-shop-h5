@@ -1,4 +1,4 @@
-import http from '../../assets/utils/http';
+import http from '../../../assets/utils/http';
 
 import {
   LOGIN_REQUEST,
