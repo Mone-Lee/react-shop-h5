@@ -1,29 +1,24 @@
-let nextTodoId = 0;
+import http from '../../../assets/utils/http';
 
-export const addTodo = text => {
+import {
+  GET_SLIDER_IMAGES_SUCCESS,
+} from '../constants/actionTypes'
+
+export const getSliderImagesSuccess = (data) => {
   return {
-    type: 'ADD_TODO',
-    id: nextTodoId++,
-    text
+    type: GET_SLIDER_IMAGES_SUCCESS,
+    data
   }
 }
 
-export const toggleTodo = id => {
-  return {
-    type: 'TOGGLE_TODO',
-    id
-  }
-}
+export const getSliderImages = () => {
+  return async (dispatch) => {
+    const res = await http.post('index/sliderImages')
 
-export const setVisibilityFilter = filter => {
-  return {
-    type: 'SET_VISIBILITY_FILTER',
-    filter
-  }
-}
+    if (res.errcode === 0) {
+      dispatch(getSliderImagesSuccess(res.data))
+    }
 
-export const VisibilityFilters = {
-  SHOW_ALL: 'SHOW_ALL',
-  SHOW_COMPLETED: 'SHOW_COMPLETED',
-  SHOW_ACTIVE: 'SHOW_ACTIVE'
+    return res;
+  }
 }

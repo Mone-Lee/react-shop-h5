@@ -1,0 +1,34 @@
+@vw: 3.75vw;
+@import "../../../../assets/styles/global.less";
+@import "../../../../assets/styles/normalize.css";
+
+.top-bar {
+  height: 50/@vw;
+  padding: 5/@vw 15/@vw;
+  background: rgb(249, 249, 249);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+
+  .top-bar-content {
+    flex: 1;
+    background-color: rgb(255, 255, 255);
+    border-radius: 4/@vw;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  span {
+    color: rgb(150, 151, 153);
+    margin: 0 -2/@vw 0 12/@vw;
+    font-size: 16/@vw;
+  }
+
+  p {
+    color :rgb(150, 151, 153);
+    font-size: 14/@vw;
+    padding: 0 10/@vw;
+  }
+}

@@ -36,6 +36,22 @@ router.post('/user/register', user.register);
 // 登录接口
 router.post('/user/login', user.login);
 
+// 登录接口
+router.post('/index/sliderImages', (ctx, next) => {
+  ctx.body = {
+    errcode: 0,
+    data: [
+      'https://zos.alipayobjects.com/rmsportal/AiyWuByWklrrUDlFignR.png',
+      'https://zos.alipayobjects.com/rmsportal/TekJlZRVCjLFexlOCuWn.png',
+      'https://zos.alipayobjects.com/rmsportal/IJOtIlfsYdTyaDTRVrLI.png'
+    ],
+    errmsg: '',
+    token: ''
+  }
+
+  ctx.status = 200;
+});
+
 app
   .use(router.routes())  // 启动路由
   .use(router.allowedMethods()) // 根据ctx.status设置response响应头
