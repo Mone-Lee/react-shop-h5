@@ -24,8 +24,9 @@
 前端页面逻辑
 
 ## 本地开发访问地址  
-首页： `http://localhost:8080` 或 `http://localhost:8080/index.html`  
 注册页： `http://localhost:8080/register.html`  
+登录页： `http://localhost:8080/login.html`  
+首页： `http://localhost:8080` 或 `http://localhost:8080/index.html`  
 
 ## 备忘录  
 启动数据库命令  
