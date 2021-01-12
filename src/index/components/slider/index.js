@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Carousel } from 'antd-mobile';
 
 class Slider extends Component {
+  constructor() {
+    super(...arguments);
+  }
+
   render() {
     const { imageList } = this.props;
 

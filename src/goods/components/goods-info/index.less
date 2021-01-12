@@ -1,0 +1,98 @@
+@vw: 3.75vw;
+
+.info-item {
+  margin-bottom: 8/@vw;
+}
+
+.goods-base-info {
+  position: relative;
+  padding: 8/@vw 16/@vw 10/@vw;
+  background-color: #fff;
+
+  .goods-price {
+    margin: 2/@vw 0 8/@vw;
+  }
+
+  .sale-price {
+    color: #ff5e15;
+    font-size: 16/@vw;
+    display: inline-flex;
+    align-items: baseline;
+
+    p {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 22/@vw;
+      line-height: 24/@vw;
+      font-weight: bolder;
+    }
+  }
+
+  .origin-price {
+    font-size: 12/@vw;
+    color: #969799;
+    line-height: 16/@vw;
+    display: flex;
+    align-items: center;
+
+    p {
+      text-decoration: line-through;
+      margin-left: 4/@vw;
+    }
+  }
+
+  .goods-title-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .goods-title {
+      font-weight: 500;
+      word-break: break-all;
+      margin-right: 22/@vw;
+      vertical-align: middle;
+      font-size: 16/@vw;
+    }
+
+    .share {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #969799;
+
+      span {
+        color: rgb(100 101 102);
+        font-size: 16/@vw;
+        margin-bottom: 4/@vw;
+      }
+
+      p {
+        font-size: 12/@vw;
+        white-space: nowrap;
+        line-height: 14/@vw;
+      }
+    }
+  }
+}
+
+.fee-info {
+  width: 100%;
+  padding: 13/@vw 16/@vw;
+  font-size: 14/@vw;
+  line-height: 18/@vw;
+  box-sizing: border-box;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+
+  .label {
+    color: #969799;
+    margin-right: 12/@vw;
+    font-size: 14/@vw;
+  }
+
+  .value {
+    color: #323233;
+    vertical-align: middle;
+  }
+}
