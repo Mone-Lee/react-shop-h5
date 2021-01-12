@@ -1,0 +1,43 @@
+@vw: 3.75vw;
+
+.goods-item {
+  width: 33.33%;
+  padding: 5/@vw 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .goods-photo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6/@vw;
+    box-sizing: border-box;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .goods-info {
+    padding: 0 10/@vw;
+    .goods-title {
+      color: #333;
+      height: 24/@vw;
+      max-height: 24/@vw;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      font-size: 12/@vw;
+      margin-bottom: 4/@vw;
+    }
+    .goods-price {
+      color: rgb(255, 94, 21);
+      font-size: 14/@vw;
+    }
+  }
+}

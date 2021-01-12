@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Carousel } from 'antd-mobile';
 
-export default class Slider extends Component {
+class Slider extends Component {
   render() {
     const { imageList } = this.props;
 
@@ -23,3 +23,5 @@ export default class Slider extends Component {
     )
   }
 }
+
+export default Slider;
