@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './index.less';
-// import '../../../../assets/icon/iconfont.css';
 
 class TopBar extends Component {
   render() {

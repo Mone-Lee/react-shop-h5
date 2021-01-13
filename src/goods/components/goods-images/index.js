@@ -9,7 +9,7 @@ class GoodsImages extends Component {
         {
           imageList && imageList.length > 0 &&
           imageList.map(image => (
-            <img style={{width: '100%'}} src={image} />
+            <img key={image} style={{width: '100%'}} src={image} />
           ))
         }
       </div>
