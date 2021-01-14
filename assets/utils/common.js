@@ -48,3 +48,10 @@ export function formatDate(date, fmt) {
   }
   return fmt;
 };
+
+export function getUrlQuery(name) {
+  const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+  const res = window.location.search.substr(1).match(reg);
+  if (res) return decodeURIComponent(res[2]);
+  return null;
+}
