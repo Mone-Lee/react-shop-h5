@@ -22,7 +22,7 @@ class Recommend extends Component {
         <div className="goods-list">
           {
             goodsList && goodsList.map((goods) => (
-              <GoodsItem key={goods.id} imageUrl={goods.imageUrl} title={goods.title} price={goods.price} />
+              <GoodsItem key={goods.id} imageUrl={goods.imageUrl} title={goods.title} price={goods.price} id={goods.id} />
             ))
           }
         </div>

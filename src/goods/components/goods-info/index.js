@@ -20,7 +20,7 @@ class GoodsInfo extends Component {
   }
 
   render() {
-    const { goodsImages, detailImages, goodsList } = this.state;
+    const { goodsImages, detailImages } = this.state;
     
     return (
       <div className="goods-info">

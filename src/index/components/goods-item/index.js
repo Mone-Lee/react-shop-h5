@@ -7,7 +7,8 @@ class GoodsItem extends Component {
   }
 
   pageToDetail = () => {
-    window.location.href = '/goods.html';
+    const { id } = this.props;
+    window.location.href = `/goods.html?gid=${id}`;
   }
 
   render() {

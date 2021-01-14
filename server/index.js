@@ -57,6 +57,11 @@ router.post('/index/goodsList', goods.getGoodsList);
 // 填入首页商品接口
 router.post('/index/insertGoodsList', goods.addGoods);
 
+// 获取商品详情
+router.post('/goods/goodsDetail', goods.getGoodsDetail);
+// 获取商品相关推荐
+router.post('/goods/goodsRecommend', goods.getGoodsRecommend);
+
 app
   .use(router.routes())  // 启动路由
   .use(router.allowedMethods()) // 根据ctx.status设置response响应头

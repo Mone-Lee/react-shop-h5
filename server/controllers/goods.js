@@ -61,9 +61,73 @@ class GoodsController {
       ctx.status = 200;
     }
   }
+
+  /**
+   * 根据商品id获取商品详情信息
+   * @param {*} ctx
+   */
+  static async getGoodsDetail(ctx) {
+    const gid = Number(ctx.request.body.gid);
+    const res = await GoodsModel.findOne({ id: gid });
+
+    if (res) {
+      ctx.body = {
+        errcode: 0,
+        errmsg: 'get goods detail',
+        token: '',
+        data: res,
+      };
+      ctx.status = 200;
+    } else {
+      ctx.body = {
+        errcode: -1,
+        errmsg: '不存在该商品',
+        token: '',
+        data: null
+      };
+      ctx.status = 200;
+    }
+  }
+
+  /**
+   * 获取商品相关推荐
+   * @param {*} ctx
+   */
+  static async getGoodsRecommend(ctx) {
+    const res = await GoodsModel.find();
+
+    let arr = res.filter((goods) => {
+      return goods.id !== Number(ctx.request.body.gid)
+    });
+    arr = arr.slice(0, 6);
+
+    if (arr) {
+      ctx.body = {
+        errcode: 0,
+        errmsg: 'goods recommend list',
+        data: {
+          list: arr,
+          hasMore: false
+        },
+        token: ''
+      }
+
+      ctx.status =  200;
+    } else {
+      ctx.body = {
+        errcode: -1,
+        errmsg: 'get goods recommend list fail',
+        token: '',
+        data: null
+      };
+      ctx.status = 200;
+    }
+  }
 }
 
 module.exports = {
   addGoods: GoodsController.addGoods,
-  getGoodsList: GoodsController.getGoodsList
+  getGoodsList: GoodsController.getGoodsList,
+  getGoodsDetail: GoodsController.getGoodsDetail,
+  getGoodsRecommend: GoodsController.getGoodsRecommend
 }
