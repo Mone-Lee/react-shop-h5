@@ -6,7 +6,7 @@
 通过直接引入自己编写的npm包（[webpack-project-builder](https://www.npmjs.com/package/webpack-project-builder)）简化搭建过程。  
 开发环境支持热更新。  
 
-接口使用koa2.x + mongodb(mongoose)进行模拟开发。 
+使用koa2.x + mongodb(mongoose)进行接口模拟开发。 
 
 ## 功能列表  
 ![功能列表](http://note.youdao.com/yws/public/resource/2f9dd0205a972ef294d6906edeb10a61/xmlnote/29B3878E95B94A8BB23E520634A7E55A/8256)    
@@ -17,8 +17,11 @@
 2. 启动本地运行环境  `npm run dev`  
 
 #### 项目结构说明  
-`/server`  
+`/server/index.js`  
 后端接口实现逻辑， 数据库连接实现逻辑  
+
+`/server/ssr.js`  
+ssr渲染服务器端逻辑实现  
 
 `/src`  
 前端页面逻辑
@@ -27,6 +30,13 @@
 注册页： `http://localhost:8080/register.html`  
 登录页： `http://localhost:8080/login.html`  
 首页： `http://localhost:8080` 或 `http://localhost:8080/index.html`  
+商品详情页： `http://localhost:8080/goods.html?gid=*`   
+
+## ssr渲染结果访问  
+仅实现首页与商品详情页。 先执行`npm run build:ssr`, 再执行`node server/ssr.js`  
+  
+首页： `http://localhost:3001/index`  
+商品详情页： `http://localhost:8080/goods/*`  
 
 ## 备忘录  
 启动数据库命令  
