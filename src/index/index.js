@@ -13,7 +13,8 @@ const loggerMiddleware = createLogger();
 import App from './containers/index';
 import rootReducer from './reducers';
 
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
+const defaultStore = window.__initial_data;
+const store = createStore(rootReducer, defaultStore, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
 render(
   <Provider store={store}>

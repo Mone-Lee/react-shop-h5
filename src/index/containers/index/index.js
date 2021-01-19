@@ -12,7 +12,7 @@ class Index extends Component {
     super(...arguments);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // http.post('index/insertGoodsList');  // 模拟填入商品数据
 
     this.getSliderImages();
@@ -36,7 +36,7 @@ class Index extends Component {
       <div className="container">
         <TopBar />
         {
-          slider && Object.keys(slider).length > 0 &&
+          slider && slider.imageList && slider.imageList.length>0 &&
           <Slider {...slider} />
         }
         {

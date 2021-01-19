@@ -1,12 +1,12 @@
 const React = require('react');
-require('./index.less');
+const { createApp } = require('./app');
+const { getSliderImagesSuccess, getIndexGoodsListSuccess } = require('./actions');
 
-class Index extends React.Component {
-  render() {
-    return (
-      <div className="container">index</div>
-    )
-  }
+const app = (context, data) => {
+  const { app, store } = createApp();
+  store.dispatch(getSliderImagesSuccess(data.slider))
+  store.dispatch(getIndexGoodsListSuccess(data.goodsList))
+  return app;
 }
 
-module.exports = <Index />;
+module.exports = app;
