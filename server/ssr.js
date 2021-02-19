@@ -19,10 +19,14 @@ ssrApp.use(static(path.resolve(__dirname , '../dist/')));
 
 ssrRouter.get('/index', async (ctx, next) => {
   // 页面路由的参数可以从这里获取，例如商品详情页的goodsid， 如果在index-server.js文件中需要（例如接口请求），则可以从传入的context中获取
-  ctx.title = 'index';
+  const data = {
+    title: '首页',
+    meta: `
+      <meta property="og:title" content="首页">
+    `
+  }
 
   // 请求页面数据
-  const data = {}
   const res1 = await axios.post(baseUrl + 'index/sliderImages');
   data['slider'] = res1.data.data;
   const res2 = await axios.post(baseUrl + 'index/goodsList');
@@ -49,6 +53,8 @@ ssrApp
 const renderMarkup = (str, data) => {
   const dataStr = JSON.stringify(data);
   return template
+    .replace('<!--PAGE_TITLE-->', data.title)
+    .replace('<!--PAGE_META-->', data.meta)
     .replace('<!--HTML_PLACEHOLDER-->', str)
     .replace('<!--INITIAL_DATA_PLACEHOLDER-->', `<script>window.__initial_data=${dataStr}</script>`);
 }

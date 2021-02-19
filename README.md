@@ -22,13 +22,12 @@
 商品详情页： `http://localhost:8080/goods.html?gid=*` 
 
 #### SSR渲染环境启动命令 
-仅实现首页与商品详情页。  
+目前仅实现首页。  
 1. 执行`npm run build`，进行客户端打包  
 2. 执行`npm run build:ssr`，进行ssr打包  
 3. 执行`node server/ssr.js`（进行服务器端页面导航）、执行`node server/index.js`（提供接口访问服务）
   
-首页： `http://localhost:3001/index`  
-商品详情页： `http://localhost:8080/goods/*`  
+首页： `http://localhost:3001/index`    
 
 #### 项目结构说明  
 `/server/index.js`  

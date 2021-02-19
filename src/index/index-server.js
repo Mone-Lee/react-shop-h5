@@ -4,8 +4,8 @@ const { getSliderImagesSuccess, getIndexGoodsListSuccess } = require('./actions'
 
 const app = (context, data) => {
   const { app, store } = createApp();
-  store.dispatch(getSliderImagesSuccess(data.slider))
-  store.dispatch(getIndexGoodsListSuccess(data.goodsList))
+  store.dispatch(getSliderImagesSuccess(data.slider));
+  store.dispatch(getIndexGoodsListSuccess(data.goodsList));
   return app;
 }
 
