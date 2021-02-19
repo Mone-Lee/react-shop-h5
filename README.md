@@ -2,19 +2,33 @@
 参考[极客时间商城（h5）](https://shop18793264.m.youzan.com/v2/feature/TJe4bYhxyP?dc_ps=2293231415741009926.200001)，使用react进行开发，webpack配合进行项目构建。
 
 ## 开发环境
-未使用create-react-app，基于webpack4.x版本进行环境搭建。  
+未使用create-react-app作为项目构建工具，基于webpack4.x版本进行环境搭建。  
 通过直接引入自己编写的npm包（[webpack-project-builder](https://www.npmjs.com/package/webpack-project-builder)）简化搭建过程。  
 开发环境支持热更新。  
 
 使用koa2.x + mongodb(mongoose)进行接口模拟开发。 
 
 ## 功能列表  
-![功能列表](http://note.youdao.com/yws/public/resource/2f9dd0205a972ef294d6906edeb10a61/xmlnote/29B3878E95B94A8BB23E520634A7E55A/8256)    
+![功能列表](https://note.youdao.com/yws/public/resource/2f9dd0205a972ef294d6906edeb10a61/xmlnote/65ADD5DAF1B44E939303291F3BB2F929/8318)    
 
 ## 项目说明  
-#### 启动命令  
+#### 本地开发环境启动命令  
 1. 启动后端服务  `node server/index.js`  
 2. 启动本地运行环境  `npm run dev`  
+
+注册页： `http://localhost:8080/register.html`  
+登录页： `http://localhost:8080/login.html`  
+首页： `http://localhost:8080` 或 `http://localhost:8080/index.html`  
+商品详情页： `http://localhost:8080/goods.html?gid=*` 
+
+#### SSR渲染环境启动命令 
+仅实现首页与商品详情页。  
+1. 执行`npm run build`，进行客户端打包  
+2. 执行`npm run build:ssr`，进行ssr打包  
+3. 执行`node server/ssr.js`（进行服务器端页面导航）、执行`node server/index.js`（提供接口访问服务）
+  
+首页： `http://localhost:3001/index`  
+商品详情页： `http://localhost:8080/goods/*`  
 
 #### 项目结构说明  
 `/server/index.js`  
@@ -25,22 +39,6 @@ ssr渲染服务器端逻辑实现
 
 `/src`  
 前端页面逻辑
-
-## 本地开发访问地址  
-注册页： `http://localhost:8080/register.html`  
-登录页： `http://localhost:8080/login.html`  
-首页： `http://localhost:8080` 或 `http://localhost:8080/index.html`  
-商品详情页： `http://localhost:8080/goods.html?gid=*`   
-
-## ssr渲染结果访问  
-仅实现首页与商品详情页。 
-运行命令：  
-1. 执行`npm run build`，进行客户端打包  
-2. 执行`npm run build:ssr`，进行ssr打包  
-3. 执行`node server/ssr.js`（进行服务器端页面导航），执行`node server/index.js`（提供接口访问服务）
-  
-首页： `http://localhost:3001/index`  
-商品详情页： `http://localhost:8080/goods/*`  
 
 #### ssr渲染流程  
 1. 使用`./src/*/index.js`入口打包生成用于浏览器解析的html文件和`index-[hash].js`文件   
