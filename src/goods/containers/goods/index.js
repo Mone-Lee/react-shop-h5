@@ -17,12 +17,10 @@ class Goods extends Component {
 
   componentDidMount() {
     let goodsId = '';
-    console.log(process.env.NODE_ENV)
     if (process.env.NODE_ENV === 'development') {
       goodsId = getUrlQuery('gid')
     } else {
-      // goodsId = Number(location.href.match(/\/details\/(\d+)/)[1]);
-      goodsId = 890522576;
+      goodsId = Number(location.href.match(/\/goods\/(\d+)/)[1]);
     }
     console.log(goodsId)
     this.getGoodsDetail(goodsId);
