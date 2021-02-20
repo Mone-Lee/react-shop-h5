@@ -6,16 +6,12 @@ class GoodsItem extends Component {
     super(...arguments);
   }
 
-  pageToDetail = () => {
-    const { id } = this.props;
-    window.location.href = `/goods.html?gid=${id}`;
-  }
-
   render() {
-    const { imageUrl, title, price } = this.props;
+    const { imageUrl, title, price, id } = this.props;
+    const env = process.env.NODE_ENV;
 
     return (
-      <div className="goods-item" onClick={this.pageToDetail}>
+      <a className="goods-item" href={env  === 'development' ? `/goods.html?gid=${id}` : `/goods/${id}`}>
         <div className="goods-photo">
           <img src={ imageUrl } />
         </div>
@@ -25,7 +21,7 @@ class GoodsItem extends Component {
             <div className="sale-price">￥{ price }</div>
           </div>
         </div>
-      </div>
+      </a>
     )
   }
 }
