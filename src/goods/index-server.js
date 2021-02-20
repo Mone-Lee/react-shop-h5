@@ -1,28 +1,12 @@
-'use strict';
 const React = require('react');
+const { createApp } = require('./app');
+const { getGoodsDetailSuccess, getRecommendGoodsSuccess } = require('./actions');
 
-class Goods extends React.Component {
-	// constructor() {
-	// 	super(...arguments);
-	// 	this.state = {
-	// 		Text: 'ssr'
-	// 	}
-	// }
-
-	render() {
-		// const { Text } = this.state;
-		return (
-			<div className="search-text">
-				<p>Goods</p>
-			</div>
-		)
-	}
+const app = (context, data) => {
+  const { app, store } = createApp();
+  store.dispatch(getGoodsDetailSuccess(data['goodsDetail']));
+  store.dispatch(getRecommendGoodsSuccess(data['recommendGoods']));
+  return app;
 }
 
-// const Goods = () => {
-//   return (
-//     <div>goods</div>
-//   )
-// }
-
-module.exports = <Goods />;
+module.exports = app;

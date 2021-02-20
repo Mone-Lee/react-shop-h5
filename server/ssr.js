@@ -5,13 +5,12 @@ if (typeof window === 'undefined') {
 const Koa = require('koa');
 const Router = require('koa-router');
 const static = require('koa-static');
+require('babel-polyfill');
 const ssrApp = new Koa();
 const ssrRouter = new Router();
 const fs = require('fs');
 const path = require('path');
 const { renderToString } = require('react-dom/server');
-const app = require('../dist/index-server.js');
-const template = fs.readFileSync(path.join(__dirname, '../dist/index.html'), 'utf-8');
 const axios = require('axios');
 const baseUrl = 'http://127.0.0.1:3000/api/';
 
@@ -32,14 +31,45 @@ ssrRouter.get('/index', async (ctx, next) => {
   const res2 = await axios.post(baseUrl + 'index/goodsList');
   data['goodsList'] = res2.data.data;
 
-  const render = servreRender(app, ctx, data);
-  
-  const html = renderMarkup(renderToString(render), data);
+  const render = servreRender('index', ctx, data);
+  const html = renderMarkup('index', renderToString(render), data);
   ctx.body = html;
   ctx.status = 200;
 })
 
-const servreRender = (app, ctx, data) => {
+ssrRouter.get('/details', async (ctx, next) => {
+  const goodsId = 890522576;
+  // const goodsId = Number(ctx.params.goodsId);
+  // if (goodsId && goodsId !== NaN) {
+    // console.log(' =========== ')
+    // console.log(goodsId)
+    const data = {
+      goodsId: goodsId
+    };
+    // // 请求页面数据
+    const res1 = await axios.post(baseUrl + 'goods/goodsDetail', { gid: goodsId });
+    data['goodsDetail'] = res1.data.data;
+    data['title'] = res1.data.data.title;
+    data['meta'] = `
+      <meta property="og:title" content="${res1.data.data.title}">
+    `
+    const res2 = await axios.post(baseUrl + 'goods/goodsRecommend', { gid: goodsId });
+    data['recommendGoods'] = res2.data.data;
+
+    console.log(data);
+    const render = servreRender('goods', ctx, data);
+    const html = renderMarkup('goods', renderToString(render), data);
+    // console.log('html ==========')
+    // console.log(html)
+    ctx.body = html;
+    ctx.status = 200;
+  // }
+})
+
+
+const servreRender = (name, ctx, data) => {
+  // let name = ctx.url.match(/\/(\w+)($|\/)/)[1];
+  const app = require(`../dist/${name}-server.js`);
   return app(ctx, data);
 }
 
@@ -50,11 +80,13 @@ ssrApp
     console.log('ssr server is running on port: 3001');
   })
 
-const renderMarkup = (str, data) => {
+const renderMarkup = (name, str, data) => {
   const dataStr = JSON.stringify(data);
+  const template = fs.readFileSync(path.join(__dirname, `../dist/${name}.html`), 'utf-8');
+
   return template
     .replace('<!--PAGE_TITLE-->', data.title)
-    .replace('<!--PAGE_META-->', data.meta)
+    .replace('<!--PAGE_META-->', data.meta || '')
     .replace('<!--HTML_PLACEHOLDER-->', str)
     .replace('<!--INITIAL_DATA_PLACEHOLDER-->', `<script>window.__initial_data=${dataStr}</script>`);
 }

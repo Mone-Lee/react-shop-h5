@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import TopBar from '../components/top-bar';
-import GoodsInfo from '../components/goods-info';
-import Recommend from '../components/recommend';
-import GoodsBar from '../components/goods-bar';
-import '../../../assets/icon/iconfont.css';
-import { getUrlQuery } from '../../../assets/utils/common';
-import http from '../../../assets/utils/http';
+import TopBar from '../../components/top-bar';
+import GoodsInfo from '../../components/goods-info';
+import Recommend from '../../components/recommend';
+import GoodsBar from '../../components/goods-bar';
+import '../../../../assets/icon/iconfont.css';
+import { getUrlQuery } from '../../../../assets/utils/common';
+import http from '../../../../assets/utils/http';
 
 import { connect } from 'react-redux';
-import { getGoodsDetail, getRecommendGoods } from '../actions';
+import { getGoodsDetail, getRecommendGoods } from '../../actions';
 
 class Goods extends Component {
   goodsDetail = {};
@@ -16,7 +16,15 @@ class Goods extends Component {
   isEnd = false;
 
   componentDidMount() {
-    const goodsId = getUrlQuery('gid');
+    let goodsId = '';
+    console.log(process.env.NODE_ENV)
+    if (process.env.NODE_ENV === 'development') {
+      goodsId = getUrlQuery('gid')
+    } else {
+      // goodsId = Number(location.href.match(/\/details\/(\d+)/)[1]);
+      goodsId = 890522576;
+    }
+    console.log(goodsId)
     this.getGoodsDetail(goodsId);
     this.getRemmendGoods(goodsId);
     // http.post('goods/goodsDetail', { gid: goodsId });
@@ -51,7 +59,7 @@ class Goods extends Component {
       <div className="goods">
         <TopBar />
         {
-          goodsDetail && goodsDetail.data &&
+          goodsDetail &&
           <GoodsInfo goodsDetail={goodsDetail.data} />
         }
         <Recommend isEnd={isEnd} goodsList={goodsList} />

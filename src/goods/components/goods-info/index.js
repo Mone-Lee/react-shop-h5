@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Slider from '../../../index/components/slider';
-import goods from '../../container/goods';
 import GoodsImages from '../goods-images';
 import './index.less';
 
@@ -25,10 +24,10 @@ class GoodsInfo extends Component {
         }
 
         <div className="info-item goods-base-info">
-          <div className="goods-price sale-price">￥ <p>{ goodsDetail.price }</p></div>
-          <div className="goods-price origin-price">价格 <p>￥{ goodsDetail.origin }</p></div>
+          <div className="goods-price sale-price">￥ <p>{ goodsDetail ? goodsDetail.price : 0 }</p></div>
+          <div className="goods-price origin-price">价格 <p>￥{ goodsDetail ? goodsDetail.origin : 0 }</p></div>
           <div className="goods-title-line">
-            <h2 className="goods-title">{ goodsDetail.title }</h2>
+            <h2 className="goods-title">{ goodsDetail ? goodsDetail.title : '' }</h2>
             <div className="share">
               <span className="iconfont iconfenxiang"></span>
               <p>分享</p>

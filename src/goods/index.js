@@ -1,23 +1,25 @@
 import React from 'react';
 import { render } from 'react-dom';
 import 'babel-polyfill';
+import { Provider } from 'react-redux';
 import '../../assets/styles/normalize.css';
 import '../../assets/styles/global.less';
 
-import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import rootReducer from './reducers';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 const loggerMiddleware = createLogger();
 
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
+import App from './containers/goods';
+import rootReducer from './reducers';
 
-import App from './container/goods';
- 
+const defaultStore = window.__initial_data;
+const store = createStore(rootReducer, defaultStore, applyMiddleware(thunkMiddleware, loggerMiddleware));
+
 render(
   <Provider store={store}>
     <App />
   </Provider>,
   document.getElementById('root')
 )
+
