@@ -31,45 +31,38 @@ ssrRouter.get('/index', async (ctx, next) => {
   const res2 = await axios.post(baseUrl + 'index/goodsList');
   data['goodsList'] = res2.data.data;
 
-  const render = servreRender('index', ctx, data);
+  const render = servreRender(ctx, data);
   const html = renderMarkup('index', renderToString(render), data);
   ctx.body = html;
   ctx.status = 200;
 })
 
-ssrRouter.get('/details', async (ctx, next) => {
-  const goodsId = 890522576;
-  // const goodsId = Number(ctx.params.goodsId);
-  // if (goodsId && goodsId !== NaN) {
-    // console.log(' =========== ')
-    // console.log(goodsId)
-    const data = {
-      goodsId: goodsId
-    };
-    // // 请求页面数据
-    const res1 = await axios.post(baseUrl + 'goods/goodsDetail', { gid: goodsId });
-    data['goodsDetail'] = res1.data.data;
-    data['title'] = res1.data.data.title;
-    data['meta'] = `
-      <meta property="og:title" content="${res1.data.data.title}">
-    `
-    const res2 = await axios.post(baseUrl + 'goods/goodsRecommend', { gid: goodsId });
-    data['recommendGoods'] = res2.data.data;
+ssrRouter.get('/goods/:goodsId', async (ctx, next) => {
+  const goodsId = Number(ctx.params.goodsId);
+  const data = {
+    goodsId: goodsId
+  };
 
-    console.log(data);
-    const render = servreRender('goods', ctx, data);
-    const html = renderMarkup('goods', renderToString(render), data);
-    // console.log('html ==========')
-    // console.log(html)
-    ctx.body = html;
-    ctx.status = 200;
-  // }
+  // 请求页面数据
+  const res1 = await axios.post(baseUrl + 'goods/goodsDetail', { gid: goodsId });
+  data['goodsDetail'] = res1.data.data;
+  data['title'] = res1.data.data.title;
+  data['meta'] = `
+    <meta property="og:title" content="${res1.data.data.title}">
+  `
+  const res2 = await axios.post(baseUrl + 'goods/goodsRecommend', { gid: goodsId });
+  data['recommendGoods'] = res2.data.data;
+
+  const render = servreRender(ctx, data);
+  const html = renderMarkup('goods', renderToString(render), data);
+  ctx.body = html;
+  ctx.status = 200;
 })
 
 
-const servreRender = (name, ctx, data) => {
-  // let name = ctx.url.match(/\/(\w+)($|\/)/)[1];
-  const app = require(`../dist/${name}-server.js`);
+const servreRender = (ctx, data) => {
+  let name = ctx.url.match(/\/(\w+)($|\/)/)[1];
+  const app = require(`../dist/static/${name}-server.js`);
   return app(ctx, data);
 }
 
