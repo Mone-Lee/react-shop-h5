@@ -51,7 +51,6 @@ class Register extends Component {
     // 输入内容校验
 
     const res = await this.props.register(username, password, email)
-    console.log(res);
     if (res.errcode === 0) {
       setItem('token', res.token);
       Toast.info('注册成功');

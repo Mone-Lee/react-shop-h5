@@ -22,7 +22,6 @@ class Goods extends Component {
     } else {
       goodsId = Number(location.href.match(/\/goods\/(\d+)/)[1]);
     }
-    console.log(goodsId)
     this.getGoodsDetail(goodsId);
     this.getRemmendGoods(goodsId);
     // http.post('goods/goodsDetail', { gid: goodsId });
