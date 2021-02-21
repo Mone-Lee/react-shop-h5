@@ -22,12 +22,13 @@
 商品详情页： `http://localhost:8080/goods.html?gid=*` 
 
 #### SSR渲染环境启动命令 
-目前仅实现首页。  
+目前仅实现 首页 和 商品详情页。  
 1. 执行`npm run build`，进行客户端打包  
 2. 执行`npm run build:ssr`，进行ssr打包  
 3. 执行`node server/ssr.js`（进行服务器端页面导航）、执行`node server/index.js`（提供接口访问服务）
   
 首页： `http://localhost:3001/index`    
+商品详情页： `http://localhost:3001/goods/*`  
 
 #### 项目结构说明  
 `/server/index.js`  
@@ -52,5 +53,5 @@ ssr渲染服务器端逻辑实现
 
 ## 备忘录  
 启动数据库命令  
-`mongod`  
+`mongod`   启动数据库  
 `mongo`
