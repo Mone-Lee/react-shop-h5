@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import 'babel-polyfill';
+import axios from 'axios';
 import { Provider } from 'react-redux';
 import '../../assets/styles/normalize.css';
 import '../../assets/styles/global.less';
@@ -13,13 +14,30 @@ const loggerMiddleware = createLogger();
 import App from './containers/goods';
 import rootReducer from './reducers';
 
-const defaultStore = window.__initial_data;
-const store = createStore(rootReducer, defaultStore, applyMiddleware(thunkMiddleware, loggerMiddleware));
+let defaultStore = null;
+let cacheKey = window.cachekey;
+if (cacheKey) {
+  axios.get(`/data-cache/${cacheKey}`).then( result => {
+    if(result) {
+      defaultStore = result.data;
+      const store = createStore(rootReducer, defaultStore, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-)
+      render(
+        <Provider store={store}>
+          <App />
+        </Provider>,
+        document.getElementById('root')
+      )
+    }
+  }, (err) => {
+  })
+} else {
+  const store = createStore(rootReducer, defaultStore, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('root')
+  )
+}
