@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { hydrate } from 'react-dom';
 import 'babel-polyfill';
 import axios from 'axios';
 import { Provider } from 'react-redux';
@@ -22,7 +22,7 @@ if (cacheKey) {
       defaultStore = result.data;
       const store = createStore(rootReducer, defaultStore, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
-      render(
+      hydrate(
         <Provider store={store}>
           <App />
         </Provider>,
@@ -34,7 +34,7 @@ if (cacheKey) {
 } else {
   const store = createStore(rootReducer, defaultStore, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
-  render(
+  hydrate(
     <Provider store={store}>
       <App />
     </Provider>,

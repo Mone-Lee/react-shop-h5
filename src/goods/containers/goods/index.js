@@ -8,7 +8,7 @@ import { getUrlQuery } from '../../../../assets/utils/common';
 import http from '../../../../assets/utils/http';
 
 import { connect } from 'react-redux';
-import { getGoodsDetail, getRecommendGoods } from '../../actions';
+import { getGoodsDetail, getRecommendGoods, getGoodsDetailSuccess, getRecommendGoodsSuccess } from '../../actions';
 
 class Goods extends Component {
 
@@ -26,13 +26,23 @@ class Goods extends Component {
   }
 
   getGoodsDetail = async (goodsId) => {
-    const { getGoodsDetail } = this.props;
-    getGoodsDetail(goodsId);
+    const { getGoodsDetail, getGoodsDetailSuccess, goodsDetail } = this.props;
+
+    if (goodsDetail) {
+      getGoodsDetailSuccess(goodsDetail);
+    } else {
+      getGoodsDetail(goodsId);
+    }
   }
 
   getRemmendGoods = async (goodsId) => {
-    const { getRecommendGoods } = this.props;
-    getRecommendGoods(goodsId);
+    const { getRecommendGoods, getRecommendGoodsSuccess, recommendGoods } = this.props;
+
+    if (recommendGoods) {
+      getRecommendGoodsSuccess(recommendGoods);
+    } else {
+      getRecommendGoods(goodsId);
+    }
   }
 
   render() {
@@ -62,9 +72,15 @@ const mapDispatchToProps = dispatch => ({
   getGoodsDetail: (goodsId) => {
     dispatch(getGoodsDetail(goodsId))
   },
+  getGoodsDetailSuccess: (data) => {
+    dispatch(getGoodsDetailSuccess(data))
+  },
   getRecommendGoods: (goodsId) => {
     dispatch(getRecommendGoods(goodsId))
-  }
+  },
+  getRecommendGoodsSuccess: (data) => {
+    dispatch(getRecommendGoodsSuccess(data))
+  },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Goods);
