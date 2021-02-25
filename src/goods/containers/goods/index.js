@@ -11,9 +11,6 @@ import { connect } from 'react-redux';
 import { getGoodsDetail, getRecommendGoods } from '../../actions';
 
 class Goods extends Component {
-  goodsDetail = {};
-  recommendList = [];
-  isEnd = false;
 
   componentDidMount() {
     let goodsId = '';
@@ -30,21 +27,12 @@ class Goods extends Component {
 
   getGoodsDetail = async (goodsId) => {
     const { getGoodsDetail } = this.props;
-    const res = await getGoodsDetail(goodsId);
-
-    if (res && res.errcode === 0) {
-      goodsDetail = res.data;
-    }
+    getGoodsDetail(goodsId);
   }
 
   getRemmendGoods = async (goodsId) => {
     const { getRecommendGoods } = this.props;
-    const res = await getRecommendGoods(goodsId);
-
-    if (res && res.errcode === 0) {
-      recommendList = res.data.list;
-      isEnd = !res.data.hasMore;
-    }
+    getRecommendGoods(goodsId);
   }
 
   render() {
