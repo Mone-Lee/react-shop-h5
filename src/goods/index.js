@@ -1,5 +1,5 @@
 import React from 'react';
-import { hydrate } from 'react-dom';
+import { hydrate, render } from 'react-dom';
 import 'babel-polyfill';
 import axios from 'axios';
 import { Provider } from 'react-redux';
@@ -14,7 +14,7 @@ const loggerMiddleware = createLogger();
 import App from './containers/goods';
 import rootReducer from './reducers';
 
-let defaultStore = null;
+let defaultStore = {};
 let cacheKey = window.cachekey;
 if (cacheKey) {
   axios.get(`/data-cache/${cacheKey}`).then( result => {
@@ -32,9 +32,9 @@ if (cacheKey) {
   }, (err) => {
   })
 } else {
-  const store = createStore(rootReducer, defaultStore, applyMiddleware(thunkMiddleware, loggerMiddleware));
+  const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
-  hydrate(
+  render(
     <Provider store={store}>
       <App />
     </Provider>,

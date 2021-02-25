@@ -21,7 +21,7 @@ class Index extends Component {
 
   getSliderImages = () => {
     const { getSliderImages, getSliderImagesSuccess, slider } = this.props;
-    if (slider) {
+    if (slider && slider.imageList) {
       getSliderImagesSuccess(slider);
     } else {
       getSliderImages();
@@ -30,7 +30,7 @@ class Index extends Component {
 
   getGoodsList = async () => {
     const { getGoodsList, getGoodsListSuccess, goodsList } = this.props;
-    if (goodsList) {
+    if (goodsList && goodsList.goodsList) {
       getGoodsListSuccess(goodsList);
     } else {
       getGoodsList();

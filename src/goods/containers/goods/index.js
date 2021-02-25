@@ -28,7 +28,7 @@ class Goods extends Component {
   getGoodsDetail = async (goodsId) => {
     const { getGoodsDetail, getGoodsDetailSuccess, goodsDetail } = this.props;
 
-    if (goodsDetail) {
+    if (goodsDetail && goodsDetail.data) {
       getGoodsDetailSuccess(goodsDetail);
     } else {
       getGoodsDetail(goodsId);
@@ -38,7 +38,7 @@ class Goods extends Component {
   getRemmendGoods = async (goodsId) => {
     const { getRecommendGoods, getRecommendGoodsSuccess, recommendGoods } = this.props;
 
-    if (recommendGoods) {
+    if (recommendGoods && recommendGoods.data) {
       getRecommendGoodsSuccess(recommendGoods);
     } else {
       getRecommendGoods(goodsId);
