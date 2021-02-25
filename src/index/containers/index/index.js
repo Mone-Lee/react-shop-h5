@@ -31,18 +31,15 @@ class Index extends Component {
   
   render() {
     const { slider, goodsList } = this.props;
+    const imageList = slider && slider.imageList ? slider && slider.imageList : []
+    const list = goodsList && goodsList.goodsList ? goodsList.goodsList.list : [];
+    const isEnd = goodsList && goodsList.goodsList ? !goodsList.goodsList.hasMore : true;
 
     return (
       <div className="container">
         <TopBar />
-        {
-          slider && slider.imageList && slider.imageList.length>0 &&
-          <Slider {...slider} />
-        }
-        {
-          goodsList && goodsList.goodsList && goodsList.goodsList.list &&
-          <Recommend goodsList={goodsList.goodsList.list} isEnd={!goodsList.goodsList.hasMore} />
-        }
+        <Slider imageList={imageList} />
+        <Recommend goodsList={list} isEnd={isEnd} />
         <BottomBar />
       </div>
     )
