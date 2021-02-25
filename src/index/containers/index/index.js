@@ -4,7 +4,7 @@ import Slider from '../../components/slider';
 import Recommend from '../../components/recommend';
 import BottomBar from '../../components/bottom-bar';
 import { connect } from 'react-redux';
-import { getSliderImages, getIndexGoodsList } from '../../actions';
+import { getSliderImages, getIndexGoodsList, getSliderImagesSuccess, getIndexGoodsListSuccess } from '../../actions';
 import http from '../../../../assets/utils/http';
 
 class Index extends Component {
@@ -20,13 +20,25 @@ class Index extends Component {
   }
 
   getSliderImages = () => {
-    const { getSliderImages } = this.props;
-    getSliderImages();
+    const { getSliderImages, getSliderImagesSuccess, slider } = this.props;
+    if (slider) {
+      getSliderImagesSuccess(slider);
+    } else {
+      getSliderImages();
+    }
   }
 
   getGoodsList = async () => {
-    const { getGoodsList } = this.props;
-    getGoodsList();
+    const { getGoodsList, getGoodsListSuccess, goodsList } = this.props;
+    if (goodsList) {
+      getGoodsListSuccess(goodsList);
+    } else {
+      getGoodsList();
+    }
+  }
+
+  handleClick = () => {
+    console.log('handleClick')
   }
   
   render() {
@@ -39,6 +51,7 @@ class Index extends Component {
       <div className="container">
         <TopBar />
         <Slider imageList={imageList} />
+        {/* <div onClick={this.handleClick}>测试</div> */}
         <Recommend goodsList={list} isEnd={isEnd} />
         <BottomBar />
       </div>
@@ -54,9 +67,15 @@ const mapDispatchToProps = dispatch => ({
   getSliderImages: () => {
     return dispatch(getSliderImages(null));  // 注意，即使不需要参数的action，仍然需要传个空，否则无法触发
   },
+  getSliderImagesSuccess: (data) => {
+    return dispatch(getSliderImagesSuccess(data))
+  },
   getGoodsList: () => {
     return dispatch(getIndexGoodsList(null));
-  }
+  },
+  getGoodsListSuccess: (data) => {
+    return dispatch(getIndexGoodsListSuccess(data))
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);
